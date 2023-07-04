@@ -3,6 +3,7 @@ from mysql.connector import Error
 import os
 import time
 from datetime import datetime, timedelta
+import sys  # Import the sys module
 
 def create_server_connection(host_name, user_name, user_password, db_name):
     connection = None
@@ -43,24 +44,24 @@ def main():
 
     if connection is None:
         print("Failed: Could not connect to MySQL server.")
-        return
+        sys.exit(1)  # Exit with status code 1
 
     # Check Orders table exists
     cursor = execute_query(connection, "SHOW TABLES LIKE 'Orders';")
     result = cursor.fetchone()
     if result is None:
         print("Failed: 'Orders' table does not exist.")
-        return
+        sys.exit(1)  # Exit with status code 1
 
     # Check Orders table has at least 1000 rows
     cursor = execute_query(connection, "SELECT COUNT(*) FROM Orders;")
     result = cursor.fetchone()
     if result[0] < 1000:
         print("Failed: 'Orders' table does not contain at least 1000 records.")
-        return
+        sys.exit(1)  # Exit with status code 1
 
     # Test SELECT query
-    customer_id = 21  # Adjust as necessary
+    customer_id = 31  # Adjust as necessary
     one_year_ago = (datetime.now() - timedelta(days=365)).date()
     cursor = execute_query(connection, f"SELECT * FROM Orders WHERE CustomerID = {customer_id} AND OrderDate > '{one_year_ago}';")
     results = cursor.fetchall()
@@ -71,7 +72,7 @@ def main():
     explain_result = cursor.fetchone()
     if explain_result[8] is None or explain_result[1] == "ALL":
         print("Failed: No index used in the SELECT query.")
-        return
+        sys.exit(1)  # Exit with status code 1
 
     print("Success: All checks passed.")
 
