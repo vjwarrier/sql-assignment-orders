@@ -33,7 +33,7 @@ jobs:
           mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports['3306'] }} -uroot -ppassword SchoolDB < ./schema.sql
 
       - name: Evaluate Assignment
-        run: python evaluate_assignment.py
+        run: python main.py
         env:
           MYSQL_HOST: 127.0.0.1
           MYSQL_PORT: ${{ job.services.mysql.ports['3306'] }}
