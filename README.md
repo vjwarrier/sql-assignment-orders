@@ -26,4 +26,6 @@ Post updating the schema, create a pull request with your changes. Your changes 
 You can see a Loom Video here of walkthrough:
 
 Part 1: https://www.loom.com/share/c5ec2a923ad945ab828bd7435c3f42f5?sid=c32af92e-3105-47f1-be3f-14c4b5bcfb9d  
+
+
 Part 2: https://www.loom.com/share/c02f5b2aa5a84e818a9c16d2e0fda33e?sid=bc7d7621-6961-4a65-8881-a92f6d74569c
